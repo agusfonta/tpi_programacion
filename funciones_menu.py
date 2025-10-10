@@ -116,21 +116,10 @@ def filtrar_por_rango_superficie(paises, min_superficie, max_superficie):
 # FUNCIONES DE ORDENAMIENTO
 # ============================================
 
-def ordenar_por_nombre(paises, ascendente=True):
-    """
-    Ordena países alfabéticamente por nombre.
-    
-    Parámetros:
-        paises (list): lista de diccionarios de países
-        ascendente (bool): True para A-Z, False para Z-A
-    
-    Retorna:
-        list: lista ordenada de países
-    """
-    # TODO: Implementar ordenamiento por nombre
-    # Usar sorted() con key y reverse
-    return paises
-
+def ordenar_paises_por(paises, reverse, tipo):
+    ordenado = sorted(paises, key=lambda pais: pais[tipo], reverse=reverse)
+    for p in ordenado:
+        print(p[tipo])
 
 def ordenar_por_poblacion(paises, ascendente=True):
     """
@@ -142,6 +131,7 @@ def ordenar_por_poblacion(paises, ascendente=True):
     
     Retorna:
         list: lista ordenada de países
+        ordenado = sorted(personas, key=lambda pais: pais['nombre'])
     """
     # TODO: Implementar ordenamiento por población
     return paises
@@ -298,14 +288,20 @@ def mostrar_estadisticas(paises):
 # FUNCIONES DE VALIDACIÓN
 # ============================================
 
-def validar_numero_entero(numero):
+def validar_numero_entero(numero): # Arreglar que acepte , . y " "
     try:
+        # numero.strip(",")
+        # numero.strip(".")
+        # numero.strip(" ")
+
         if not (numero.isdigit()):
             raise ValueError
         return True
-    
+
     except ValueError:
         print("Error: Debe ingresar un número entero válido, sin coma (,) ni punto (.).")
+
+
 
 
 def validar_opcion_menu(min_opcion, max_opcion):
@@ -369,30 +365,46 @@ def menu_filtros(paises):
             valido = validar_texto(continente)
             if valido:
                 buscar_por_filtro(paises, continente, filtro)
-            else:
-                None
 
 
         elif opcion == 2:
-            poblacion = input("Ingrese la poblacion: ")
-            filtro = "poblacion"
-            valido = validar_numero_entero(poblacion)
+            valido,min,max = validar_rango()
+            tipo = "poblacion"
             if valido:
-                buscar_por_filtro(paises, poblacion, filtro)
-            else:
-                None
+                print(buscar_por_rango(min, max, paises,tipo))
 
         elif opcion == 3:
-            superficie = input("Ingrese la superficie: ")
-            filtro = "superficie"
-            valido = validar_numero_entero(superficie)
+            valido,min,max = validar_rango()
+            tipo = "superficie"
             if valido:
-                buscar_por_filtro(paises, superficie, filtro)
-            else:
-                None
+                print(buscar_por_rango(min, max, paises,tipo))
     
         elif opcion == 0:
             break
+
+def validar_rango():
+    rango_min = input("Ingrese el valor minimo del rango: ")
+    rango_max = input("Ingrese el valor maximo del rango: ")
+
+    while rango_max <= rango_min:
+        rango_max = input("Por favor ingrese un valor mayor al minimo: ")
+
+    if validar_numero_entero(rango_max) and validar_numero_entero(rango_min):
+        return True, rango_min, rango_max
+
+
+def buscar_por_rango(min,max,paises,tipo):
+    print(f"- Paises con {tipo} entre {min} y {max}")
+    min = int(min)
+    max = int(max)
+    existen = False
+    for pais in paises:
+        if min <= int(pais[tipo]) <= max:
+            existen = True
+            print(f"{pais["nombre"],pais[tipo]}")
+
+    if not existen:
+        print("No se encontraron paises entre esos rangos.")
 
 
 def menu_ordenamiento(paises):
@@ -405,46 +417,37 @@ def menu_ordenamiento(paises):
     while True:
         print("\n--- ORDENAR PAÍSES ---")
         print("1. Por nombre (A-Z)")
-        print("2. Por población (menor a mayor)")
-        print("3. Por superficie (menor a mayor)")
-        print("4. Por superficie (mayor a menor)")
+        print("2. Por nombre (Z-A)")
+        print("3. Por población (menor a mayor)")
+        print("4. Por población (mayor a menor)")
+        print("5. Por superficie (menor a mayor)")
+        print("6. Por superficie (mayor a menor)")
         print("0. Volver al menú principal")
         
-        opcion = validar_opcion_menu(0, 4)
+        opcion = validar_opcion_menu(0, 6)
         
         if opcion == 1:
-            """
-            from operator import itemgetter
-
-            personas = [
-                {'nombre': 'Ana', 'edad': 23},
-                {'nombre': 'Juan', 'edad': 30},
-                {'nombre': 'Lucía', 'edad': 28}
-            ]
-
-            # Ordenar por la clave 'edad'
-            personas.sort(key=itemgetter('edad'))
-            print(personas)
-            
-            
-            
-            """
-
+            print("1. Paises ordenados (A-Z)")
+            ordenar_paises_por(paises, False, "nombre")
+        
         elif opcion == 2:
-            # TODO: Ordenar por nombre descendente
-            pass
+            print("2. Paises ordenados (Z-A)")
+            ordenar_paises_por(paises,True, "nombre")
+
         elif opcion == 3:
-            # TODO: Ordenar por población ascendente
-            pass
+            print("3. Paises ordenados por poblacion de menor a mayor")
+            ordenar_paises_por(paises, False,"poblacion")
+
         elif opcion == 4:
-            # TODO: Ordenar por población descendente
-            pass
+            print("4. Paises ordenados por poblacion de mayor a menor")
+            ordenar_paises_por(paises, True,"poblacion")
         elif opcion == 5:
-            # TODO: Ordenar por superficie ascendente
-            pass
+            print("5. Paises ordenados por superficie de menor a mayor")
+            ordenar_paises_por(paises, False,"superficie")
         elif opcion == 6:
-            # TODO: Ordenar por superficie descendente
-            pass
+            print("6. Paises ordenados por superficie de menor a mayor")
+            ordenar_paises_por(paises, True,"superficie")
+
         elif opcion == 0:
             break
 

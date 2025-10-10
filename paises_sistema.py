@@ -39,16 +39,14 @@ def main():
             validacion = f.validar_texto(nombre)
 
             if validacion:
-                f.buscar_por_nombre(paises,nombre) # lista de paises falta cargarla
-            pass
+                f.buscar_por_nombre(paises,nombre) 
             
-        elif opcion == 2:
+        elif opcion == 2: # ARREGLAR FUNCION RANGO , que acepte , . " " y buscar que es el None que aparece en funciones de filtro
             f.menu_filtros(paises)
-            
+
         elif opcion == 3:
-            # Ordenar países
             f.menu_ordenamiento(paises)
-            
+
         elif opcion == 4:
             # Mostrar estadísticas
             f.mostrar_estadisticas(paises)
