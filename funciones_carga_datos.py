@@ -40,3 +40,24 @@ def crear_lista_de_dicccionarios_de_paises(RUTA):
         print(f"Error al cargar el archivo: {e}")
         return []
 
+# ============================================
+# FUNCIONES DE CARGA DE DATOS
+# ============================================
+
+def crear_lista_de_dicccionarios_de_paises(RUTA):
+    datos = []  # Lista de diccionarios de paises
+    try:
+        with open(RUTA, newline='', encoding="utf-8") as archivo:
+            paises = csv.DictReader(archivo, delimiter=";")
+            for fila in paises:
+                fila['poblacion'] = fila['poblacion']
+                fila['superficie'] = fila['superficie']
+                datos.append(fila)
+        
+        return datos
+    except FileNotFoundError:
+        print(f"Error: El archivo '{RUTA}' no fue encontrado.")
+        return []
+    except Exception as e:
+        print(f"Error al cargar el archivo: {e}")
+        return []
