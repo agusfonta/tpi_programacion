@@ -55,22 +55,6 @@ def validar_texto(texto):
         print("Error: ", e)
         return False
 
-# def validar_rango():
-#     while True:
-#         rango_min = input("Ingrese el valor minimo del rango: ")
-#         if not validar_numero_entero(rango_min):
-#             continue
-
-#         rango_max = input("Ingrese el valor maximo del rango: ")
-#         if not validar_numero_entero(rango_max):
-#             continue
-        
-#         while rango_max <= rango_min:
-#             rango_max = input("Por favor ingrese un valor mayor al minimo: ")
-#             if not validar_numero_entero(rango_max):
-#                 continue
-
-#         return True, rango_min, rango_max
 
 def validar_rango():
     while True:

@@ -51,7 +51,7 @@ def main():
                 if validacion:
                     funciones_busqueda.buscar_por_nombre(paises,nombre) 
                 
-            case 2: # ARREGLAR FUNCION RANGO , que acepte , . " " y buscar que es el None que aparece en funciones de filtro
+            case 2: #TODO buscar que es el None que aparece en funciones de filtro
                 funciones_menu.menu_filtros(paises)
 
             case 3:

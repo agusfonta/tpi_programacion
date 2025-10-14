@@ -17,19 +17,22 @@ RUTA_ARCHIVO = "paises.csv"
 
 def buscar_por_nombre(list_dict_paises, dato): #OPCION 1 DEL MENU 
 
-    """ Ejemplo guia: 
+    coincidencias = []
 
-    list_dict_paises = diccionario
-    dato =  China
-    filtro = nombre """
+    print("=================================")
+    print(f"Busqueda de paises con '{dato}'")
+    print("=================================")
 
     for pais in list_dict_paises:
-        if pais["nombre"] == dato:
-            dic_pais_encontrado = pais
-            break
+        if dato.lower() in pais["nombre"].lower():
+            coincidencias.append(pais)
 
-    for caracteristica,dato in dic_pais_encontrado.items():
-        print(caracteristica.capitalize() ,": ",dato)
+
+    for pais in coincidencias:
+        for key, value in pais.items():
+            print(key.capitalize(),": ",value)
+            
+        print("-----------------------")
 
 
 def buscar_por_filtro(list_dict_paises, dato, filtro): #OPCION 2 DEL MENU 
@@ -54,3 +57,4 @@ def buscar_por_rango(min,max,paises,tipo):
 
     if not existen:
         print("No se encontraron paises entre esos rangos.")
+
