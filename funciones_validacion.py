@@ -18,18 +18,16 @@ RUTA_ARCHIVO = "paises.csv"
 
 def validar_numero_entero(numero): # Arreglar que acepte , . y " "
     try:
-        # numero.strip(",")
-        # numero.strip(".")
-        # numero.strip(" ")
-
-        if not (numero.isdigit()):
-            raise ValueError
+        if (not(numero.isdigit())) and (int(numero) <= 0):
+            raise ValueError("Debe ingresar un número entero válido positivo, sin decimales.")
+    
+        if '.' in numero or ',' in numero:
+            raise ValueError("No se permiten puntos ni comas. Intenta de nuevo.\n")
         return True
-
-    except ValueError:
-        print("Error: Debe ingresar un número entero válido, sin coma (,) ni punto (.).")
-
-
+    
+    except ValueError as e:
+        print("Error: ", e )
+        print("Escritura permitida -> 20000 ")
 
 
 def validar_opcion_menu(min_opcion, max_opcion):
@@ -57,12 +55,38 @@ def validar_texto(texto):
         print("Error: ", e)
         return False
 
+# def validar_rango():
+#     while True:
+#         rango_min = input("Ingrese el valor minimo del rango: ")
+#         if not validar_numero_entero(rango_min):
+#             continue
+
+#         rango_max = input("Ingrese el valor maximo del rango: ")
+#         if not validar_numero_entero(rango_max):
+#             continue
+        
+#         while rango_max <= rango_min:
+#             rango_max = input("Por favor ingrese un valor mayor al minimo: ")
+#             if not validar_numero_entero(rango_max):
+#                 continue
+
+#         return True, rango_min, rango_max
+
 def validar_rango():
-    rango_min = input("Ingrese el valor minimo del rango: ")
-    rango_max = input("Ingrese el valor maximo del rango: ")
+    while True:
+        rango_min = input("Ingrese el valor minimo del rango: ")
+        if not validar_numero_entero(rango_min):
+            continue
+        rango_min  = int(rango_min)
+        while True:
+            rango_max = input("Ingrese el valor maximo del rango: ")
 
-    while rango_max <= rango_min:
-        rango_max = input("Por favor ingrese un valor mayor al minimo: ")
+            if not validar_numero_entero(rango_max):
+                continue
+            rango_max  = int(rango_max)
+            if not rango_max > rango_min:
+                print(f"El numero ingresado debe ser mayor al minimo ingresado -> {rango_min}")
+            else:
+                break
 
-    if validar_numero_entero(rango_max) and validar_numero_entero(rango_min):
         return True, rango_min, rango_max

@@ -10,82 +10,48 @@ import funciones_menu
 import funciones_ordenamiento
 import funciones_validacion
 import funciones_visualizacion
+from statistics import median
 RUTA_ARCHIVO = "paises.csv"
 # ============================================
 # FUNCIONES DE ESTADÍSTICAS
 # ============================================
 
 def obtener_pais_mayor_poblacion(paises):
-    """
-    Encuentra el país con mayor población.
-    
-    Parámetros:
-        paises (list): lista de diccionarios de países
-    
-    Retorna:
-        dict: país con mayor población
-    """
-    # TODO: Implementar búsqueda del país con mayor población
-    # Usar max() con key
-    pass
-
+    pais_mayor =  max(paises, key=lambda p: int(p["poblacion"]))
+    return pais_mayor
 
 def obtener_pais_menor_poblacion(paises):
-    """
-    Encuentra el país con menor población.
-    
-    Parámetros:
-        paises (list): lista de diccionarios de países
-    
-    Retorna:
-        dict: país con menor población
-    """
-    # TODO: Implementar búsqueda del país con menor población
-    pass
-
+    pais_menor =  min(paises, key=lambda p: int(p["poblacion"]))
+    return pais_menor
 
 def calcular_promedio_poblacion(paises):
-    """
-    Calcula el promedio de población de los países.
-    
-    Parámetros:
-        paises (list): lista de diccionarios de países
-    
-    Retorna:
-        float: promedio de población
-    """
-    # TODO: Implementar cálculo de promedio
-    # Sumar todas las poblaciones y dividir por cantidad
-    pass
-
+    total = sum(int(p["poblacion"]) for p in paises)
+    promedio = total / len(paises)
+    return promedio
 
 def calcular_promedio_superficie(paises):
-    """
-    Calcula el promedio de superficie de los países.
-    
-    Parámetros:
-        paises (list): lista de diccionarios de países
-    
-    Retorna:
-        float: promedio de superficie
-    """
-    # TODO: Implementar cálculo de promedio
-    pass
+    total = sum(int(p["superficie"]) for p in paises)
+    superficie = total / len(paises)
+    return superficie
 
 
 def contar_paises_por_continente(paises):
-    """
-    Cuenta la cantidad de países por continente.
+    asia = 0
+    europa= 0
+    oceania = 0
+    africa = 0
+    america = 0
+
+    for p in paises:
+        if p["continente"] == "Asia":
+            asia += 1
+        elif p["continente"] == "Europa":
+            europa += 1
+        elif p["continente"] == "Oceanía":
+            oceania += 1
+        elif p["continente"] == "África":
+            africa += 1
+        elif p["continente"] == "América":
+            america += 1
     
-    Parámetros:
-        paises (list): lista de diccionarios de países
-    
-    Retorna:
-        dict: diccionario con continente como clave y cantidad como valor
-    """
-    conteo = {}
-    # TODO: Implementar conteo por continente
-    # - Recorrer países
-    # - Si el continente no existe en el diccionario, agregarlo con valor 1
-    # - Si existe, incrementar el contador
-    return conteo
+    return asia, europa, oceania, africa, america

@@ -41,12 +41,6 @@ def mostrar_paises(paises):
 
 
 def mostrar_estadisticas(paises):
-    """
-    Muestra las estadísticas generales de los países.
-    
-    Parámetros:
-        paises (list): lista de diccionarios de países
-    """
     if not paises:
         print("No hay datos para mostrar estadísticas.")
         return
@@ -54,12 +48,25 @@ def mostrar_estadisticas(paises):
     print("\n" + "="*50)
     print("ESTADÍSTICAS GENERALES")
     print("="*50)
+
+    print("Pais con mayor poblacion: ")
+    print(funciones_estadisticas.obtener_pais_mayor_poblacion(paises))
     
-    # TODO: Llamar a las funciones de estadísticas y mostrar resultados
-    # - País con mayor población
-    # - País con menor población
-    # - Promedio de población
-    # - Promedio de superficie
-    # - Cantidad de países por continente
+    print(" === Pais con menor poblacion === ")
+    print(funciones_estadisticas.obtener_pais_menor_poblacion(paises))
+
+    print(" === Promedio poblacion === ")
+    print(funciones_estadisticas.calcular_promedio_poblacion(paises))
+
+    print(" === Promedio superficie === ")
+    print(funciones_estadisticas.calcular_promedio_superficie(paises))
+
+    print(" === Cantidad de paises por continente === ")
+    asia, europa, oceania, africa, america = funciones_estadisticas.contar_paises_por_continente(paises)
+    print(f"=== Cantidad de paises de ASIA: {asia}")
+    print(f"=== Cantidad de paises de EUROPA: {europa}")
+    print(f"=== Cantidad de paises de OCEANIA: {oceania}")
+    print(f"=== Cantidad de paises de AFRICA: {africa}")
+    print(f"=== Cantidad de paises de AMERICA: {america}")
     
     print("="*50 + "\n")

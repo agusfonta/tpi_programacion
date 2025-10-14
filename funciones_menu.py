@@ -40,7 +40,7 @@ def menu_filtros(paises):
         print("0. Volver al menú principal")
         
         opcion = funciones_validacion.validar_opcion_menu(0, 3)
-        
+
 
         if opcion == 1:
             continente = input("Ingrese el continente: ").capitalize()
