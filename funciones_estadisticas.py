@@ -2,7 +2,7 @@
 # IMPORTACIONES
 # ============================================
 from statistics import median
-RUTA_ARCHIVO = "paises.csv"
+
 # ============================================
 # FUNCIONES DE ESTADÍSTICAS
 # ============================================

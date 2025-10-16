@@ -1,12 +1,9 @@
-# ============================================
-# IMPORTACIONES
-# ============================================
-RUTA_ARCHIVO = "paises.csv"
+
 # ============================================
 # FUNCIONES DE BÚSQUEDA
 # ============================================
 
-def buscar_por_nombre(list_dict_paises, dato): #OPCION 1 DEL MENU 
+def buscar_por_nombre(lista_paises, dato): #OPCION 1 DEL MENU 
 
     coincidencias = []
 
@@ -14,10 +11,11 @@ def buscar_por_nombre(list_dict_paises, dato): #OPCION 1 DEL MENU
     print(f"Busqueda de paises que coinciden con '{dato}'")
     print("=" *45)
 
-    for pais in list_dict_paises:
+    for pais in lista_paises:
         if dato.lower() in pais["nombre"].lower():
             coincidencias.append(pais)
 
+# Otra forma de escritura: coincidencias = [p for p in lista_paises if dato.lower() in p["nombre"].lower()]
 
     for pais in coincidencias:
         for key, value in pais.items():
@@ -26,14 +24,17 @@ def buscar_por_nombre(list_dict_paises, dato): #OPCION 1 DEL MENU
         print("-----------------------")
 
 
-def buscar_por_filtro(list_dict_paises, dato, filtro): #OPCION 2 DEL MENU 
+def buscar_por_filtro(lista_paises, dato, filtro): #OPCION 2 DEL MENU 
 
     paises_encontrados = []
 
-    for pais in list_dict_paises:
+    for pais in lista_paises:
         if pais[filtro] == dato:
             paises_encontrados.append(pais["nombre"])
-    print(paises_encontrados)
+
+    for nombre in paises_encontrados: print(f"• {nombre}")
+
+    if len(paises_encontrados)==0: print("- No hay paises encontrados con esas caracteristicas")
 
 def buscar_por_rango(min,max,paises,tipo):
 

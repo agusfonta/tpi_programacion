@@ -1,11 +1,10 @@
 # ============================================
 # IMPORTACIONES
 # ============================================
-import csv
 import funciones_busqueda 
 import funciones_ordenamiento
 import funciones_validacion
-RUTA_ARCHIVO = "paises.csv"
+
 
 # ============================================
 # FUNCIONES DE MENÚS

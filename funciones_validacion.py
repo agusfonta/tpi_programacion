@@ -1,15 +1,10 @@
 # ============================================
-# IMPORTACIONES
-# ============================================
-RUTA_ARCHIVO = "paises.csv"
-
-# ============================================
 # FUNCIONES DE VALIDACIÓN
 # ============================================
 
 def validar_numero_entero(numero): # Arreglar que acepte , . y " "
     try:
-        if (not(numero.isdigit())) and (int(numero) <= 0):
+        if (not(numero.isdigit())) or (int(numero) <= 0):
             raise ValueError("Debe ingresar un número entero válido positivo, sin decimales.")
     
         if '.' in numero or ',' in numero:
@@ -65,3 +60,4 @@ def validar_rango():
                 break
 
         return True, rango_min, rango_max
+

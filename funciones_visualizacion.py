@@ -2,7 +2,6 @@
 # IMPORTACIONES
 # ============================================
 import funciones_estadisticas
-RUTA_ARCHIVO = "paises.csv"
 
 # ============================================
 # FUNCIONES DE VISUALIZACIÓN
@@ -30,11 +29,11 @@ def mostrar_estadisticas(paises):
     print(" ")
 # =======================================================================
     print("  ---- Promedio poblacion ----   ")
-    print(f" => {funciones_estadisticas.calcular_promedio_poblacion(paises)}")
+    print(f" => {funciones_estadisticas.calcular_promedio_poblacion(paises):,}")
     print(" ")
 # =======================================================================
     print("  ---- Promedio superficie ----   ")
-    print(f" => {funciones_estadisticas.calcular_promedio_superficie(paises)}")
+    print(f" => {funciones_estadisticas.calcular_promedio_superficie(paises):,}")
     print(" ")
 # =======================================================================
     print("  ---- Paises por continente ----  ")
