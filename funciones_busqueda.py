@@ -1,15 +1,6 @@
 # ============================================
 # IMPORTACIONES
 # ============================================
-import csv
-import funciones_busqueda 
-import funciones_carga_datos
-import funciones_estadisticas
-import funciones_filtros
-import funciones_menu
-import funciones_ordenamiento
-import funciones_validacion
-import funciones_visualizacion
 RUTA_ARCHIVO = "paises.csv"
 # ============================================
 # FUNCIONES DE BÚSQUEDA
@@ -19,9 +10,9 @@ def buscar_por_nombre(list_dict_paises, dato): #OPCION 1 DEL MENU
 
     coincidencias = []
 
-    print("=================================")
-    print(f"Busqueda de paises con '{dato}'")
-    print("=================================")
+    print("=" *45)
+    print(f"Busqueda de paises que coinciden con '{dato}'")
+    print("=" *45)
 
     for pais in list_dict_paises:
         if dato.lower() in pais["nombre"].lower():
@@ -44,17 +35,15 @@ def buscar_por_filtro(list_dict_paises, dato, filtro): #OPCION 2 DEL MENU
             paises_encontrados.append(pais["nombre"])
     print(paises_encontrados)
 
-
 def buscar_por_rango(min,max,paises,tipo):
+
     print(f"- Paises con {tipo} entre {min} y {max}")
     min = int(min)
     max = int(max)
-    existen = False
+    paises_encontrados = []
     for pais in paises:
-        if min <= int(pais[tipo]) <= max:
-            existen = True
-            print(f"{pais["nombre"],pais[tipo]}")
-
-    if not existen:
+        if min <= pais[tipo] <= max:
+            paises_encontrados.append(pais)
+    if len(paises_encontrados)==0:
         print("No se encontraron paises entre esos rangos.")
-
+    return paises_encontrados

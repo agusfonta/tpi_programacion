@@ -1,15 +1,6 @@
 # ============================================
 # IMPORTACIONES
 # ============================================
-import csv
-import funciones_busqueda 
-import funciones_carga_datos
-import funciones_estadisticas
-import funciones_filtros
-import funciones_menu
-import funciones_ordenamiento
-import funciones_validacion
-import funciones_visualizacion
 from statistics import median
 RUTA_ARCHIVO = "paises.csv"
 # ============================================
@@ -17,20 +8,20 @@ RUTA_ARCHIVO = "paises.csv"
 # ============================================
 
 def obtener_pais_mayor_poblacion(paises):
-    pais_mayor =  max(paises, key=lambda p: int(p["poblacion"]))
+    pais_mayor =  max(paises, key=lambda p: p["poblacion"])
     return pais_mayor
 
 def obtener_pais_menor_poblacion(paises):
-    pais_menor =  min(paises, key=lambda p: int(p["poblacion"]))
+    pais_menor =  min(paises, key=lambda p: p["poblacion"])
     return pais_menor
 
 def calcular_promedio_poblacion(paises):
-    total = sum(int(p["poblacion"]) for p in paises)
+    total = sum(p["poblacion"] for p in paises)
     promedio = total / len(paises)
     return promedio
 
 def calcular_promedio_superficie(paises):
-    total = sum(int(p["superficie"]) for p in paises)
+    total = sum(p["superficie"] for p in paises)
     superficie = total / len(paises)
     return superficie
 

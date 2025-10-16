@@ -3,13 +3,8 @@
 # ============================================
 import csv
 import funciones_busqueda 
-import funciones_carga_datos
-import funciones_estadisticas
-import funciones_filtros
-import funciones_menu
 import funciones_ordenamiento
 import funciones_validacion
-import funciones_visualizacion
 RUTA_ARCHIVO = "paises.csv"
 
 # ============================================
@@ -66,13 +61,8 @@ def menu_filtros(paises):
             break
 
 
-def menu_ordenamiento(paises):
-    """
-    Submenú para ordenar países.
-    
-    Parámetros:
-        paises (list): lista de diccionarios de países
-    """
+def menu_ordenamiento(paises): # Menu OP 2
+
     while True:
         print("\n--- ORDENAR PAÍSES ---")
         print("1. Por nombre (A-Z)")
@@ -85,30 +75,36 @@ def menu_ordenamiento(paises):
         
         opcion = funciones_validacion.validar_opcion_menu(0, 6)
         
-        if opcion == 1:
-            print("1. Paises ordenados (A-Z)")
-            funciones_ordenamiento.ordenar_paises_por(paises, False, "nombre")
-        
-        elif opcion == 2:
-            print("2. Paises ordenados (Z-A)")
-            funciones_ordenamiento.ordenar_paises_por(paises,True, "nombre")
+        match opcion:
+            case 1:
+                print("1. Paises ordenados (A-Z)")
+                funciones_ordenamiento.ordenar_paises_por(paises, False, "nombre")
+            
+            case 2:
+                print("2. Paises ordenados (Z-A)")
+                funciones_ordenamiento.ordenar_paises_por(paises,True, "nombre")
 
-        elif opcion == 3:
-            print("3. Paises ordenados por poblacion de menor a mayor")
-            funciones_ordenamiento.ordenar_paises_por(paises, False,"poblacion")
+            case 3:
+                print("3. Paises ordenados por poblacion de menor a mayor")
+                funciones_ordenamiento.ordenar_paises_por(paises, False,"poblacion")
 
-        elif opcion == 4:
-            print("4. Paises ordenados por poblacion de mayor a menor")
-            funciones_ordenamiento.ordenar_paises_por(paises, True,"poblacion")
-        elif opcion == 5:
-            print("5. Paises ordenados por superficie de menor a mayor")
-            funciones_ordenamiento.ordenar_paises_por(paises, False,"superficie")
-        elif opcion == 6:
-            print("6. Paises ordenados por superficie de menor a mayor")
-            funciones_ordenamiento.ordenar_paises_por(paises, True,"superficie")
+            case 4:
+                print("4. Paises ordenados por poblacion de mayor a menor")
+                funciones_ordenamiento.ordenar_paises_por(paises, True,"poblacion")
 
-        elif opcion == 0:
-            break
+            case 5:
+                print("5. Paises ordenados por superficie de menor a mayor")
+                funciones_ordenamiento.ordenar_paises_por(paises, False,"superficie")
+            
+            case 6:
+                print("6. Paises ordenados por superficie de menor a mayor")
+                funciones_ordenamiento.ordenar_paises_por(paises, True,"superficie")
+
+            case 0:
+                break
+
+            #case _: Validacion hecha antes en la variable opcion
+
 
 
 

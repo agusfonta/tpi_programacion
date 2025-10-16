@@ -1,15 +1,6 @@
 # ============================================
 # IMPORTACIONES
 # ============================================
-import csv
-import funciones_busqueda 
-import funciones_carga_datos
-import funciones_estadisticas
-import funciones_filtros
-import funciones_menu
-import funciones_ordenamiento
-import funciones_validacion
-import funciones_visualizacion
 RUTA_ARCHIVO = "paises.csv"
 
 # ============================================
