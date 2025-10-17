@@ -25,6 +25,7 @@ def menu_principal():
 
 def menu_filtros(paises):
     while True:
+        print(" ")
         print("="*39)
         print("   2. FILTRAR PAISES ")
         print("="*39)
@@ -64,7 +65,8 @@ def menu_filtros(paises):
 def menu_ordenamiento(paises): # Menu OP 2
 
     while True:
-        print("\n" + "="*39)
+        print(" ")
+        print("="*39)
         print("   3. ORDENAR PAISES ")
         print("="*39)
         print(" 1. Por nombre (A-Z)")
@@ -80,27 +82,39 @@ def menu_ordenamiento(paises): # Menu OP 2
         
         match opcion:
             case 1:
-                print("· 1. Paises ordenados (A-Z)")
+                print(" ")
+                print(f"1. Paises ordenados (A-Z) ")
+                print("-"*39)
                 funciones_ordenamiento.ordenar_paises_por(paises, False, "nombre")
             
             case 2:
-                print("· 2. Paises ordenados (Z-A)")
+                print(" ")
+                print("2. Paises ordenados (Z-A)")
+                print("-"*39)
                 funciones_ordenamiento.ordenar_paises_por(paises,True, "nombre")
 
             case 3:
-                print("· 3. Paises ordenados por poblacion de menor a mayor")
+                print(" ")
+                print("3. Paises ordenados por poblacion de menor a mayor")
+                print("-"*39)
                 funciones_ordenamiento.ordenar_paises_por(paises, False,"poblacion")
 
             case 4:
-                print("· 4. Paises ordenados por poblacion de mayor a menor")
+                print(" ")
+                print("4. Paises ordenados por poblacion de mayor a menor")
+                print("-"*39)
                 funciones_ordenamiento.ordenar_paises_por(paises, True,"poblacion")
 
             case 5:
-                print("· 5. Paises ordenados por superficie de menor a mayor")
+                print(" ")
+                print("5. Paises ordenados por superficie de menor a mayor")
+                print("-"*39)
                 funciones_ordenamiento.ordenar_paises_por(paises, False,"superficie")
             
             case 6:
-                print("· 6. Paises ordenados por superficie de menor a mayor")
+                print(" ")
+                print("6. Paises ordenados por superficie de menor a mayor")
+                print("-"*39)
                 funciones_ordenamiento.ordenar_paises_por(paises, True,"superficie")
 
             case 0:

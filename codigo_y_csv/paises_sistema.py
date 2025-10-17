@@ -19,20 +19,20 @@ def main():
 #____________________________ CARGAR DATOS _______________________________________# 
 
     paises = funciones_carga_datos.crear_lista_paises(RUTA_ARCHIVO)
-    
     if not paises:
         print("No se pudieron cargar los datos. El programa finalizará.")
         return
-    
     print(f"Se cargaron {len(paises)} países correctamente.")
     
 #____________________________ FUNCION PRINCIPAL ___________________________________#
+
     while True:
         funciones_menu.menu_principal()
         opcion = funciones_validacion.validar_opcion_menu(0, 4)
             
         match opcion:
             case 1: #___________________ Op1. Buscar por pais ____________________
+                print(" ")
                 print("=" *39)
                 print(f" 1. BUSCAR PAIS POR NOMBRE")
                 print("=" *39)

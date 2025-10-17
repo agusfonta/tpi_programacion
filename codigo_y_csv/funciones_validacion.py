@@ -5,42 +5,49 @@
 def validar_numero_entero(numero): # Arreglar que acepte , . y " "
     try:
         if (not(numero.isdigit())) or (int(numero) <= 0):
-            raise ValueError("X Debe ingresar un número entero válido positivo, sin decimales.")
+            raise ValueError("Debe ingresar un número entero válido positivo, sin decimales.")
     
         if '.' in numero or ',' in numero:
-            raise ValueError("X No se permiten puntos ni comas. Intenta de nuevo.\n")
+            raise ValueError("No se permiten puntos ni comas. Intenta de nuevo.\n")
         return True
     
     except ValueError as e:
-        print("X Error: ", e )
-        print("- Escritura permitida -> 20000 ")
+        print("~"*39)
+        print("  X Error: ", e )
+        print("  - Escritura permitida -> 20000 ")
+        print("~"*39)
 
 
 def validar_opcion_menu(min_opcion, max_opcion):
     while True:
         try:
             opcion = int(input("· Seleccione una opción: "))
-            print("\n")
 
             if min_opcion <= opcion <= max_opcion:
                 return opcion
             else:
-                print(f"X Error: Ingrese un número entre {min_opcion} y {max_opcion}")
+                print("~"*39)
+                print(f"  X Error: Ingrese un número entre {min_opcion} y {max_opcion}")
+                print("~"*39)
         except ValueError:
-            print("X Error: Debe ingresar un número válido.")
+            print("~"*39)
+            print("  X Error: Debe ingresar un número válido.")
+            print("~"*39)
 
 def validar_texto(texto):
     try:
         if len(texto) == 0:
-            raise ValueError("X Campo vacio. Por favor ingrese una palabra")
+            raise ValueError("Campo vacio. Por favor ingrese una palabra")
         
         if not texto.isalpha():
-            raise ValueError("X Por favor ingrese una palabra")
+            raise ValueError("Por favor ingrese una palabra")
 
         return True
 
     except ValueError as e:
-        print("Error: ", e)
+        print("~"*39)
+        print("  X Error: ", e)
+        print("~"*39)
         return False
 
 
@@ -57,7 +64,9 @@ def validar_rango():
                 continue
             rango_max  = int(rango_max)
             if not rango_max > rango_min:
-                print(f"X El numero ingresado debe ser mayor al minimo ingresado -> {rango_min}")
+                print("~"*39)
+                print(f"  X El numero ingresado debe ser mayor al minimo ingresado -> {rango_min}")
+                print("~"*39)
             else:
                 break
 
