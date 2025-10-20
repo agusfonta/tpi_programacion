@@ -9,6 +9,7 @@ import funciones_carga_datos
 import funciones_menu
 import funciones_validacion
 import funciones_visualizacion
+import funciones_editar_csv
 
 RUTA_ARCHIVO = "paises.csv"  # Nombre del archivo CSV
 
@@ -29,7 +30,7 @@ def main():
 
     while True:
         funciones_menu.menu_principal()
-        opcion = funciones_validacion.validar_opcion_menu(0, 4)
+        opcion = funciones_validacion.validar_opcion_menu(0, 6)
             
         match opcion:
             case 1: #___________________ Op1. Buscar por pais ____________________
@@ -54,11 +55,22 @@ def main():
                 print("=" *50)
                 funciones_visualizacion.mostrar_estadisticas(paises)
             
+            case 5: #_________________ Op5. Añadir pais ___________________________
+                print("=" *50)
+                print(f" 5. AÑADIR PAIS NUEVO")
+                print("=" *50)
+                funciones_editar_csv.añadir(paises)
+
+            case 6: #_________________ Op0. Editar pais ___________________________
+                print("=" *50)
+                print(f" 6. EDITAR PAÍS")
+                print("=" *50)
+                funciones_editar_csv.editar(paises)
             case 0: #_________________ Op0. Salir _______________________________
                 print("=" *50)
                 print(f" 0. SALIR")
                 print("=" *50)
-                print("\n¡Gracias por usar el sistema! Hasta luego.")
+                print(" ¡Gracias por usar el sistema! Hasta luego.")
                 break
 
             # case _ : Ya esta validado en las validaciones de la opcion 

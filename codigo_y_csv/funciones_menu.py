@@ -19,6 +19,8 @@ def menu_principal(): #TODO agregar y editar pais
     print(" 2. Filtrar países")
     print(" 3. Ordenar países")
     print(" 4. Mostrar estadísticas")
+    print(" 5. Agregar pais nuevo")
+    print(" 6. Editar pais")
     print(" 0. Salir")
     print("-"*50)
 

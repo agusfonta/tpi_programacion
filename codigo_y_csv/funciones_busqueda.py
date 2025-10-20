@@ -1,4 +1,4 @@
-
+import funciones_carga_datos
 # ============================================
 # FUNCIONES DE BÚSQUEDA
 # ============================================
@@ -8,8 +8,9 @@ def buscar_por_nombre(lista_paises, dato, tipo): #OPCION 1 DEL MENU
     print(" ")
     print(f"· Paises que coinciden con '{dato}' ")
     print("-"*50)
+    dato_normalizado = funciones_carga_datos.normalizar_texto(dato)
     for pais in lista_paises:
-        if dato.lower() in pais[tipo].lower():
+        if dato_normalizado.lower() in pais[tipo].lower():
             coincidencias.append(pais)
     if len(coincidencias)==0: print(f"- No hay paises encontrados con '{dato}'")
     for pais in coincidencias:
