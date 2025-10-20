@@ -9,6 +9,7 @@ import funciones_carga_datos
 import funciones_menu
 import funciones_validacion
 import funciones_visualizacion
+
 RUTA_ARCHIVO = "paises.csv"  # Nombre del archivo CSV
 
 # ============================================
@@ -32,15 +33,15 @@ def main():
             
         match opcion:
             case 1: #___________________ Op1. Buscar por pais ____________________
-                print(" ")
-                print("=" *39)
-                print(f" 1. BUSCAR PAIS POR NOMBRE")
-                print("=" *39)
-                nombre = input("· Ingrese el nombre del país a buscar: ").capitalize()
-                validacion = funciones_validacion.validar_texto(nombre)
-                if validacion:
-                    funciones_busqueda.buscar_por_nombre(paises,nombre)
-            
+                    print(" ")
+                    print("=" *50)
+                    print(f" 1. BUSCAR PAIS POR NOMBRE")
+                    print("=" *50)
+                    nombre = input("· Ingrese el nombre del país a buscar: ").capitalize()
+                    texto = funciones_validacion.validar_texto(nombre)
+                    if texto:
+                        funciones_busqueda.buscar_por_nombre(paises,texto,"nombre")
+
             case 2: #_________________ Op2. Buscar por filtros ___________________
                 funciones_menu.menu_filtros(paises)
 
@@ -48,15 +49,15 @@ def main():
                 funciones_menu.menu_ordenamiento(paises)
             
             case 4: #_________________ Op4. Mostrar estadisticas _________________
-                print("=" *39)
+                print("=" *50)
                 print(f" 4. MOSTRAR ESTADISTICAS")
-                print("=" *39)
+                print("=" *50)
                 funciones_visualizacion.mostrar_estadisticas(paises)
             
             case 0: #_________________ Op0. Salir _______________________________
-                print("=" *39)
+                print("=" *50)
                 print(f" 0. SALIR")
-                print("=" *39)
+                print("=" *50)
                 print("\n¡Gracias por usar el sistema! Hasta luego.")
                 break
 
