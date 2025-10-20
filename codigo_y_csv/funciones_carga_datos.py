@@ -5,14 +5,11 @@
 # ============================================
 import csv
 import unicodedata
-RUTA_ARCHIVO = "paises.csv"  # Nombre del archivo CSV
+RUTA_ARCHIVO = "paises.csv"  
 
-# # ============================================
-# # FUNCIONES DE CARGA DE DATOS
-# # ============================================
-
-import csv
-import unicodedata
+# ============================================
+# FUNCIONES DE CARGA DE DATOS
+# ============================================
 
 def normalizar_texto(texto):
     """Elimina las tildes de un texto"""

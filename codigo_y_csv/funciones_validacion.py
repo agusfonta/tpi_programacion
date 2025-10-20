@@ -4,6 +4,9 @@
 
 def validar_numero_entero(numero): # Arreglar que acepte , . y " "
     try:
+        if len(numero) == 0:
+            numero = input(" x Campo vacio. Por favor ingrese una palabra: ")
+        
         if (not(numero.isdigit())) or (int(numero) <= 0):
             raise ValueError("Debe ingresar un número entero válido positivo, sin decimales.")
     
@@ -11,11 +14,12 @@ def validar_numero_entero(numero): # Arreglar que acepte , . y " "
             raise ValueError("No se permiten puntos ni comas. Intenta de nuevo.\n")
         return True
     
+    
     except ValueError as e:
-        print("~"*50)
+        print("~"*70)
         print("  x Error: ", e )
         print("  - Escritura permitida -> 20000 ")
-        print("~"*50)
+        print("~"*70)
 
 
 def validar_opcion_menu(min_opcion, max_opcion):

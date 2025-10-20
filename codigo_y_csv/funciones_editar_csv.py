@@ -1,109 +1,71 @@
+
+# ============================================
+# IMPORTACIONES
+# ============================================
 import csv
 import funciones_validacion
+from funciones_carga_datos import normalizar_texto
 
 RUTA_ARCHIVO = "paises.csv"
 
 
-def verificar_y_reparar_csv():
-    """
-    Verifica que el CSV tenga el header correcto.
-    Si no lo tiene, lo agrega.
-    """
-    try:
-        with open(RUTA_ARCHIVO, 'r', encoding='utf-8') as f:
-            primera_linea = f.readline().strip()
-            
-        # Si no tiene el header correcto, lo agregamos
-        if primera_linea != "nombre;poblacion;superficie;continente":
-            with open(RUTA_ARCHIVO, 'r', encoding='utf-8') as f:
-                contenido = f.read()
-            
-            with open(RUTA_ARCHIVO, 'w', encoding='utf-8') as f:
-                f.write("nombre;poblacion;superficie;continente\n")
-                if contenido and not contenido.startswith("nombre;poblacion"):
-                    f.write(contenido)
-                    
-    except FileNotFoundError:
-        # Crear el archivo si no existe
-        with open(RUTA_ARCHIVO, 'w', encoding='utf-8') as f:
-            f.write("nombre;poblacion;superficie;continente\n")
+# TODO ARREGLAR ERRORES DE VALIDACION EN FUNCION AÑADIR Y ELIMINAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# ============================================
+# FUNCIONES DE CARGA DE DATOS
+# ============================================
 
 def añadir(paises):
-    """
-    Agrega un nuevo país al CSV y a la lista en memoria.
-    Retorna True si se agregó correctamente, False si ya existe o hubo error.
-    """
-    nombre = input("· Ingresa el nombre del pais: ").strip().capitalize()
+    nombre = input("· Ingresa el nombre del pais: ")
     nombre = funciones_validacion.validar_texto(nombre)
-    
-    # Verificar si el país ya existe
+    nombre = normalizar_texto(nombre)
+
     for pais in paises:
         if nombre.lower() == pais["nombre"].lower():
-            print("~"*50)
-            print("  x Error: El país ya existe en el sistema.")
-            print("~"*50)
+            print("- Pais existente")
             return False
-    
-    # Crear el diccionario para el nuevo país
-    dic_agregar = {}
+
+    dic_agregar = {} 
     dic_agregar["nombre"] = nombre
+
+    poblacion = input("· Ingresa la poblacion del pais: ")
+
+    while not poblacion or not funciones_validacion.validar_numero_entero(poblacion): 
+        poblacion = input(f"  Ingrese nuevamente la población: ")
+    dic_agregar["poblacion"] = int(poblacion)
+
+    superficie = input("· Ingresa la superficie del pais: ")
     
-    # Solicitar población
-    while True:
-        poblacion = input("· Ingresa la poblacion del pais: ")
-        if funciones_validacion.validar_numero_entero(poblacion):
-            dic_agregar["poblacion"] = int(poblacion)
-            break
+    while not superficie or not funciones_validacion.validar_numero_entero(superficie):  
+        superficie = input(f"  Ingrese nuevamente la superficie: ")
+    dic_agregar["superficie"] = int(superficie)
+
+    continente = input("· Ingresa el continente del pais: ")
     
-    # Solicitar superficie
-    while True:
-        superficie = input("· Ingresa la superficie del pais: ")
-        if funciones_validacion.validar_numero_entero(superficie):
-            dic_agregar["superficie"] = int(superficie)
-            break
-    
-    # Solicitar continente
-    continente = input("· Ingresa el continente del pais: ").strip().capitalize()
-    continente = funciones_validacion.validar_texto(continente)
-    dic_agregar["continente"] = continente
-    
+    while not continente or not funciones_validacion.validar_texto(continente):
+        continente = input(f"  Ingrese nuevamente el continente: ")
+    dic_agregar["continente"] = normalizar_texto(continente)
+
     try:
-        # Verificar que el CSV esté correcto antes de agregar
-        verificar_y_reparar_csv()
-        
-        # Agregar al archivo CSV (modo append, sin escribir header)
         with open(RUTA_ARCHIVO, "a", newline="", encoding="utf-8") as archivo:
             campos = ["nombre", "poblacion", "superficie", "continente"]
             escritor = csv.DictWriter(archivo, fieldnames=campos, delimiter=";")
             escritor.writerow(dic_agregar)
         
-        # Agregar a la lista en memoria
-        paises.append(dic_agregar)
-        
-        print("~"*50)
-        print(f"  ✓ País '{nombre}' agregado exitosamente.")
-        print("~"*50)
+        paises.append(dic_agregar) 
+        print(" - País agregado exitosamente")
         return True
-                
+            
     except FileNotFoundError:
         print("~"*50)
         print("  x Error: Archivo no encontrado.")
         print("~"*50)
         return False
-    except Exception as e:
-        print("~"*50)
-        print(f"  x Error al agregar el país: {e}")
-        print("~"*50)
-        return False
-
 
 def editar(paises):
-    """
-    Edita un país existente en el CSV y en la lista en memoria.
-    """
-    nombre_buscar = input("· Ingresa el nombre del país a editar: ").strip().capitalize()
+    nombre_buscar = input("· Ingresa el nombre del país a editar: ")
+    nombre_buscar = funciones_validacion.validar_texto(nombre_buscar)
+    nombre_buscar = normalizar_texto(nombre_buscar)
     
-    # Buscar el país en la lista
     pais_encontrado = None
     for pais in paises:
         if nombre_buscar.lower() == pais["nombre"].lower():
@@ -111,70 +73,51 @@ def editar(paises):
             break
     
     if not pais_encontrado:
-        print("~"*50)
-        print(f"  x Error: No se encontró el país '{nombre_buscar}'.")
-        print("~"*50)
+        print("- País no encontrado")
         return False
     
-    # Mostrar datos actuales
     print("-"*50)
-    print("  Datos actuales del país:")
+    print(f"· Datos actuales de {pais_encontrado["nombre"].capitalize()}")
     for key, value in pais_encontrado.items():
         print(f"  {key.capitalize()}: {value}")
     print("-"*50)
+    print(" · Ingresa los nuevos datos:")
     
-    # Solicitar nuevos datos
-    print("\n· Ingresa los nuevos datos (presiona Enter para mantener el valor actual):\n")
-    
-    nuevo_nombre = input(f"  Nombre [{pais_encontrado['nombre']}]: ").strip().capitalize()
+    nuevo_nombre = input(f"  Nombre [{pais_encontrado['nombre']}]: ")
     if nuevo_nombre:
         nuevo_nombre = funciones_validacion.validar_texto(nuevo_nombre)
-    else:
-        nuevo_nombre = pais_encontrado['nombre']
+        pais_encontrado['nombre'] = normalizar_texto(nuevo_nombre)
     
-    nueva_poblacion = input(f"  Población [{pais_encontrado['poblacion']}]: ").strip()
+    nueva_poblacion = input(f"  Población [{pais_encontrado['poblacion']}]: ")
     if nueva_poblacion:
-        while not funciones_validacion.validar_numero_entero(nueva_poblacion):
-            nueva_poblacion = input(f"  Población [{pais_encontrado['poblacion']}]: ").strip()
-        nueva_poblacion = int(nueva_poblacion)
-    else:
-        nueva_poblacion = pais_encontrado['poblacion']
+        while not nueva_poblacion or not funciones_validacion.validar_numero_entero(nueva_poblacion):  # AGREGADO while
+            nueva_poblacion = input(f"  Población: ")
+        pais_encontrado['poblacion'] = int(nueva_poblacion)
     
-    nueva_superficie = input(f"  Superficie [{pais_encontrado['superficie']}]: ").strip()
+    nueva_superficie = input(f"  Superficie [{pais_encontrado['superficie']}]: ")
     if nueva_superficie:
-        while not funciones_validacion.validar_numero_entero(nueva_superficie):
-            nueva_superficie = input(f"  Superficie [{pais_encontrado['superficie']}]: ").strip()
-        nueva_superficie = int(nueva_superficie)
-    else:
-        nueva_superficie = pais_encontrado['superficie']
+        while not nueva_superficie or not funciones_validacion.validar_numero_entero(nueva_superficie):  # AGREGADO while
+            nueva_superficie = input(f"  Superficie: ")
+        pais_encontrado['superficie'] = int(nueva_superficie)
     
-    nuevo_continente = input(f"  Continente [{pais_encontrado['continente']}]: ").strip().capitalize()
+    nuevo_continente = input(f"  Continente [{pais_encontrado['continente']}]: ")
     if nuevo_continente:
-        nuevo_continente = funciones_validacion.validar_texto(nuevo_continente)
-    else:
-        nuevo_continente = pais_encontrado['continente']
+        while not nuevo_continente or not funciones_validacion.validar_texto(nuevo_continente):
+            nuevo_continente = input(f"  Continente: ")
+        pais_encontrado['continente'] = normalizar_texto(nuevo_continente)
     
     try:
-        # Actualizar en la lista en memoria
-        pais_encontrado['nombre'] = nuevo_nombre
-        pais_encontrado['poblacion'] = nueva_poblacion
-        pais_encontrado['superficie'] = nueva_superficie
-        pais_encontrado['continente'] = nuevo_continente
-        
-        # Reescribir todo el archivo CSV con los datos actualizados
         with open(RUTA_ARCHIVO, "w", newline="", encoding="utf-8") as archivo:
             campos = ["nombre", "poblacion", "superficie", "continente"]
             escritor = csv.DictWriter(archivo, fieldnames=campos, delimiter=";")
             escritor.writeheader()
             escritor.writerows(paises)
         
-        print("~"*50)
-        print(f"  ✓ País '{nuevo_nombre}' editado exitosamente.")
-        print("~"*50)
+        print(" - País editado exitosamente")
         return True
         
-    except Exception as e:
+    except FileNotFoundError:
         print("~"*50)
-        print(f"  x Error al editar el país: {e}")
+        print("  x Error: Archivo no encontrado.")
         print("~"*50)
         return False
