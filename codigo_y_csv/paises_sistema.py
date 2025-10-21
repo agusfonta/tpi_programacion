@@ -22,7 +22,7 @@ def main():
 
     paises = funciones_carga_datos.crear_lista_paises(RUTA_ARCHIVO)
     if not paises:
-        print("No se pudieron cargar los datos. El programa finalizará.")
+        print(" Carga fallida, CSV vacio. El programa finalizará.")
         return
     print(f"Se cargaron {len(paises)} países correctamente.")
     
@@ -38,10 +38,7 @@ def main():
                     print("=" *50)
                     print(f" 1. BUSCAR PAIS POR NOMBRE")
                     print("=" *50)
-                    nombre = input("· Ingrese el nombre del país a buscar: ").capitalize()
-                    texto = funciones_validacion.validar_texto(nombre)
-                    if texto:
-                        funciones_busqueda.buscar_por_nombre(paises,texto,"nombre")
+                    funciones_menu.ingresar_texto(paises,"nombre")
 
             case 2: #_________________ Op2. Buscar por filtros ___________________
                 funciones_menu.menu_filtros(paises)

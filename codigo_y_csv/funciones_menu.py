@@ -10,7 +10,7 @@ import funciones_validacion
 # FUNCIONES DE MENÚS
 # ============================================
 
-def menu_principal(): #TODO agregar y editar pais
+def menu_principal(): #MENU PRINCIPAL
 
     print("\n" + "="*50)
     print("    SISTEMA DE GESTIÓN DE PAÍSES")
@@ -25,7 +25,7 @@ def menu_principal(): #TODO agregar y editar pais
     print("-"*50)
 
 
-def menu_filtros(paises):
+def menu_filtros(paises): #MENU PRINCIPAL OP 2
     while True:
         print(" ")
         print("="*50)
@@ -39,33 +39,21 @@ def menu_filtros(paises):
         
         opcion = funciones_validacion.validar_opcion_menu(0, 3)
 
+        match opcion: 
+            case 1:
+                ingresar_texto(paises,"continente")
+    
+            case 2:
+                ingresar_rango(paises)
 
-        if opcion == 1:
-            continente = input("· Ingrese el continente: ").capitalize()
-            texto = funciones_validacion.validar_texto(continente)
-            if texto:
-                funciones_busqueda.buscar_por_nombre(paises, texto, "continente")
-
-
-        elif opcion == 2:
-            valido,min,max = funciones_validacion.validar_rango()
+            case 3:
+                ingresar_rango(paises)
         
-            if valido:
-                funciones_busqueda.buscar_por_rango(min, max, paises,"poblacion")
-            
-
-        elif opcion == 3:
-            valido,min,max = funciones_validacion.validar_rango()
-    
-            if valido:
-                funciones_busqueda.buscar_por_rango(min, max, paises,"superficie")
-    
-        elif opcion == 0:
-            break
+            case 0:
+                break
 
 
-def menu_ordenamiento(paises): # Menu OP 2
-
+def menu_ordenamiento(paises): # Menu >PRINCIPAL OP 3
     while True:
         print(" ")
         print("="*50)
@@ -124,9 +112,27 @@ def menu_ordenamiento(paises): # Menu OP 2
 
             #case _: Validacion hecha antes en la variable opcion
 
+def ingresar_rango(paises):
+    while True:
+        rango_min = input("· Ingrese el valor minimo del rango: ")
+        if not funciones_validacion.validar_numero_entero(rango_min):
+            continue
+        rango_min=int(rango_min)
+        while True:
+            rango_max = input("· Ingrese el valor maximo del rango: ")
+            if not funciones_validacion.validar_numero_entero(rango_max):
+                continue
+            rango_max  = int(rango_max)
+            break
+        if funciones_validacion.validar_rango(rango_min, rango_max):
+            funciones_busqueda.buscar_por_rango(rango_min, rango_max, paises, "poblacion")
+            break
 
-
-
-
-
-
+def ingresar_texto(paises, tipo):
+    while True:
+        dato_ingresado= input(f"· Ingrese el {tipo}: ").strip()
+        if not funciones_validacion.validar_texto(dato_ingresado):
+            continue
+        dato_ingresado = dato_ingresado.capitalize()
+        funciones_busqueda.buscar_por_nombre(paises, dato_ingresado, tipo)
+        break

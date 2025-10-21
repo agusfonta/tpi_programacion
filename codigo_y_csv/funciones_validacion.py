@@ -2,24 +2,26 @@
 # FUNCIONES DE VALIDACIÓN
 # ============================================
 
-def validar_numero_entero(numero): # Arreglar que acepte , . y " "
+def validar_numero_entero(numero):
     try:
         if len(numero) == 0:
-            numero = input(" x Campo vacio. Por favor ingrese una palabra: ")
+            raise ValueError("Campo vacío. Debe ingresar un número.")
         
-        if (not(numero.isdigit())) or (int(numero) <= 0):
-            raise ValueError("Debe ingresar un número entero válido positivo, sin decimales.")
-    
-        if '.' in numero or ',' in numero:
-            raise ValueError("No se permiten puntos ni comas. Intenta de nuevo.\n")
+        if '.' in numero or ',' in numero or ' ' in numero:
+            raise ValueError("No se permiten puntos, comas ni espacios.")
+        
+        if not numero.isdigit():
+            raise ValueError("Debe ingresar solo dígitos numéricos.")
+        # Validar que sea mayor a 0
+        if int(numero) <= 0:
+            raise ValueError("El número debe ser mayor a 0.")
         return True
-    
-    
     except ValueError as e:
         print("~"*70)
-        print("  x Error: ", e )
-        print("  - Escritura permitida -> 20000 ")
+        print(f"  x Error: {e}")
+        print("  - Escritura permitida -> 20000")
         print("~"*70)
+        return False
 
 
 def validar_opcion_menu(min_opcion, max_opcion):
@@ -39,16 +41,17 @@ def validar_opcion_menu(min_opcion, max_opcion):
             print("~"*50)
 
 def validar_texto(texto):
-    
-    while True:
+    try:
         if len(texto) == 0:
-            texto = input(" x Campo vacio. Por favor ingrese una palabra: ")
-            
+            raise ValueError(" x Campo vacío. Debe ingresar un texto.")
         if not texto.isalpha():
-            texto = input(" x Por favor ingrese una palabra: ")
-            continue
-
-        return texto
+            raise ValueError(" x Solo se permiten letras.")
+        return True
+    except ValueError as e:
+        print("~"*70)
+        print(f"  x Error: {e}")
+        print("~"*70)
+        return False
 
 
 def validar_rango():
@@ -71,4 +74,3 @@ def validar_rango():
                 break
 
         return True, rango_min, rango_max
-
