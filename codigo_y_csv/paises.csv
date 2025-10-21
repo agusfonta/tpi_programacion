@@ -1,10 +1,42 @@
 nombre;poblacion;superficie;continente
-Estados Unidos;331900000;9833517;América
-Indonesia;273800000;1904569;Asia
-Argentina;3445678765432;23345676543;America
-Nigeria;216746000;923768;África
-Mexico;128932753;1964375;América
-Rusia;144100000;17098242;Europa
+Argentina;45700000;2780400;América
+Argentina;45700000;2780400;América
+Brasil;215000000;8515767;América
+Perú;;1285216;América
+Alemania;83240000;357386;Europa
+España;47450795;505990;Europa
+Sudáfrica;60042000;1221037;África
+Japón;125700000;377975;Asia
+Japón;textoEnLugarDeNumero;377975;Asia
+Australia;26000000;;Oceanía
+Canadá;38910000;9984670;América
+Chile;19212362;756950;América
+Italia;60317116;301340;Europa
+India;1408000000;3287263;Asia
+Noruega;5425270;385207;Europa
 Egipto;104258000;1002450;África
-Francia;67391582;643801;Europa
-
+Colombia;51520000;1141748;América
+Nigeria;216746000;923768;África
+China;1412000000;9596961;Asia
+China;1412000000;9596961;Asia y con error al final de la linea
+Francia;67390000;643801;Europa
+Suecia;10550000;450295;Europa
+Dinamarca;5831000;43094;Europa
+Finlandia;5540000;338424;Europa
+Islandia;376000;103000;Europa
+Bolivia;12220000;1098581;América
+Uruguay;3426000;176215;América
+Venezuela;28440000;;América
+Ecuador;17643000;283561;América
+Paraguay;7133000;406752;América
+Estados Unidos;331900000;9833517;América
+México;128932753;1964375;América
+Guatemala;17260000;108889;América
+Cuba;11300000;109884;América
+Corea del Sur;51780000;100210;Asia
+Corea del Norte;25700000;120540;Asia
+Tailandia;70078203;513120;Asia
+Vietnam;98168829;331212;Asia
+Filipinas;113880328;300000;Asia
+Arabia Saudita;35800000;2149690;Asia
+Irán;87700000;1648195;Asia

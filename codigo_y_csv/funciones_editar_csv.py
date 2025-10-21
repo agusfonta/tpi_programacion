@@ -12,7 +12,7 @@ RUTA_ARCHIVO = "paises.csv"
 # FUNCIONES DE EDITAR CSV
 # ============================================
 
-# ------- DE AGREGAR---------------------
+# ------- DE AGREGAR--------
 def añadir(paises):
     dic_agregar = {} 
 
@@ -72,8 +72,7 @@ def validar_pais_existe(nombre, paises):
         if nombre.lower() == pais["nombre"].lower():
             return True
 
-# -------  DE EDITAR ---------------------
-
+# -------  DE EDITAR ----------
 
 def editar_pais(tipo, pais):
     

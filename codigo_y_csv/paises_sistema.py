@@ -24,7 +24,6 @@ def main():
     if not paises:
         print(" Carga fallida, CSV vacio. El programa finalizará.")
         return
-    print(f"Se cargaron {len(paises)} países correctamente.")
     
 #____________________________ FUNCION PRINCIPAL ___________________________________#
 
