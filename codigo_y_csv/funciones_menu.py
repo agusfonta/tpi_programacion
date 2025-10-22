@@ -20,7 +20,7 @@ def menu_principal(): #MENU PRINCIPAL
     print(" 3. Ordenar países")
     print(" 4. Mostrar estadísticas")
     print(" 5. Agregar pais nuevo")
-    print(" 6. Editar pais")
+    print(" 6. Editar pais existente")
     print(" 0. Salir")
     print("-"*50)
 
@@ -103,7 +103,7 @@ def menu_ordenamiento(paises): # Menu >PRINCIPAL OP 3
             
             case 6:
                 print(" ")
-                print("6. Paises ordenados por superficie de menor a mayor")
+                print("6. Paises ordenados por superficie de mayor a menor")
                 print("-"*50)
                 funciones_ordenamiento.ordenar_paises_por(paises, True,"superficie")
 
