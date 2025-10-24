@@ -3,8 +3,8 @@
 # ============================================
 # IMPORTACIONES
 # ============================================
-import csv
-import unicodedata
+import csv # Para leer archivos CSV
+import unicodedata # Para normalizar texto (eliminar tildes)
 RUTA_ARCHIVO = "paises.csv"  
 
 # ============================================
@@ -16,12 +16,22 @@ def normalizar_texto(texto):
     return unicodedata.normalize('NFD', texto).encode('ascii', 'ignore').decode('utf-8')
 
 def crear_lista_paises(RUTA):
-    paises = []
-    paises_sin_repetir = set()
+    """
+    Lee el archivo CSV y crea una lista de diccionarios con los países.
+    Valida cada registro y reporta errores encontrados.
+    
+    Retorna:
+        list: Lista de diccionarios con datos de países válidos
+        
+    """
+
+    paises = [] # Países válidos que se cargarán
+    paises_sin_repetir = set() # Set para evitar duplicados 
     errores = []  # Lista para almacenar los errores
-    linea_numero = 1  # Contador de líneas (empieza en 1, el header es línea 1)
+    linea_numero = 1  # Contador de líneas
     
     try:
+        # Abrir archivo CSV con encoding UTF-8 para soportar tildes y ñ
         with open(RUTA, newline='', encoding="utf-8") as archivo:
             paises_csv = csv.DictReader(archivo, delimiter=";")
             
@@ -99,13 +109,13 @@ def crear_lista_paises(RUTA):
         
         return paises
         
-    except FileNotFoundError:
+    except FileNotFoundError: # Si el archivo no existe
         print("="*70)
         print(f" x ERROR CRÍTICO: El archivo '{RUTA}' no fue encontrado.")
         print(f" Verifica que el archivo exista en la ruta correcta.")
         print("="*70)
         exit(1)
-    except Exception as e:
+    except Exception as e:  # Cualquier otro error inesperado
         print("="*70)
         print(f" x ERROR CRÍTICO: {type(e)._name_}")
         print(f" {str(e)}")
