@@ -1,9 +1,4 @@
 # ============================================
-# IMPORTACIONES
-# ============================================
-from statistics import median
-
-# ============================================
 # FUNCIONES DE ESTADÍSTICAS
 # ============================================
 
@@ -44,5 +39,7 @@ def contar_paises_por_continente(paises):
             africa += 1
         elif p["continente"] == "América":
             america += 1
+
+        lista = [asia, europa, oceania, africa, america]
     
-    return asia, europa, oceania, africa, america
+    return lista

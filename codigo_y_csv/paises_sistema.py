@@ -10,6 +10,7 @@ import funciones_menu
 import funciones_validacion
 import funciones_visualizacion
 import funciones_editar_csv
+import funciones_estadisticas
 
 RUTA_ARCHIVO = "paises.csv"  # Nombre del archivo CSV
 
@@ -49,8 +50,12 @@ def main():
                 print("=" *50)
                 print(f" 4. MOSTRAR ESTADISTICAS")
                 print("=" *50)
-                funciones_visualizacion.mostrar_estadisticas(paises)
-            
+
+                funciones_visualizacion.mostrar_estadisticas()
+
+                if not paises:
+                    print("- No hay datos para mostrar estadísticas.")
+
             case 5: #_________________ Op5. Añadir pais ___________________________
                 print("=" *50)
                 print(f" 5. AÑADIR PAIS NUEVO")

@@ -37,34 +37,34 @@ def añadir(paises):
             print("~"*50)
             return False
 
-def pedir_datos_nuevo_pais(tipo, paises, metodo, dic=None):
+def pedir_datos_nuevo_pais(key, paises, metodo, dic=None):
     
     while True:
-        dato = input(f"· Ingresa {tipo} del pais: ").strip()
+        dato = input(f"· Ingresa {key} del pais: ").strip()
 
-        if tipo in ["poblacion", "superficie"]:
+        if key in ["poblacion", "superficie"]:
             if not funciones_validacion.validar_numero_entero(dato):
                 continue  
             dato = int(dato) 
             break  
 
-        if tipo in ["nombre","continente"]:
+        if key in ["nombre","continente"]:
             if not funciones_validacion.validar_texto(dato):
                 continue  
             dato = dato.capitalize()
             break
 
-    if tipo == "nombre":
+    if key == "nombre":
         if validar_pais_existe(dato, paises):
             if metodo == "agregar":
                 print("- Pais existente")
                 return False
             if metodo == "editar":
                 for pais in paises:
-                    if pais[tipo] == dato:
+                    if pais[key] == dato:
                         return True, pais
                 
-    dic[tipo] = dato
+    dic[key] = dato
             
 
 def validar_pais_existe(nombre, paises):
@@ -74,23 +74,23 @@ def validar_pais_existe(nombre, paises):
 
 # -------  DE EDITAR ----------
 
-def editar_pais(tipo, pais):
+def editar_pais(key, pais):
     
     while True:
-        dato = input(f"· [Dato anterior: {pais[tipo]}] Valor actualizado de {tipo.capitalize()}: ").strip()
+        dato = input(f"· [Dato anterior: {pais[key]}] Valor actualizado de {key.capitalize()}: ").strip()
 
 
-        if tipo in ["poblacion", "superficie"]:
+        if key in ["poblacion", "superficie"]:
             if not funciones_validacion.validar_numero_entero(dato):
                 continue  
             dato = int(dato) 
             break  
 
-        if tipo in ["nombre","continente"]:
+        if key in ["nombre","continente"]:
             if not funciones_validacion.validar_texto(dato):
                 continue  
             dato = dato.capitalize()
-            pais[tipo] = dato
+            pais[key] = dato
             break
 
 
