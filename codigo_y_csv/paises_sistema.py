@@ -1,16 +1,15 @@
-""" Sistema de Gestión de Países - TPI Programación """
+# Sistema de Gestión de Países - TPI Programación 
 
 # ============================================
 # IMPORTACIONES
 # ============================================
 
-import funciones_busqueda 
 import funciones_carga_datos
 import funciones_menu
 import funciones_validacion
 import funciones_visualizacion
 import funciones_editar_csv
-import funciones_estadisticas
+import funciones_pide_datos
 
 RUTA_ARCHIVO = "paises.csv"  # Nombre del archivo CSV
 
@@ -19,6 +18,7 @@ RUTA_ARCHIVO = "paises.csv"  # Nombre del archivo CSV
 # ============================================
 
 def main():
+    """Funcion principal donde se ejecuta todo el programa"""
 #____________________________ CARGAR DATOS _______________________________________# 
 
     paises = funciones_carga_datos.crear_lista_paises(RUTA_ARCHIVO)
@@ -38,7 +38,7 @@ def main():
                     print("=" *50)
                     print(f" 1. BUSCAR PAIS POR NOMBRE")
                     print("=" *50)
-                    funciones_menu.ingresar_texto(paises,"nombre")
+                    funciones_pide_datos.ingresar_texto(paises,"nombre")
 
             case 2: #_________________ Op2. Buscar por filtros ___________________
                 funciones_menu.menu_filtros(paises)
@@ -60,13 +60,13 @@ def main():
                 print("=" *50)
                 print(f" 5. AÑADIR PAIS NUEVO")
                 print("=" *50)
-                funciones_editar_csv.añadir(paises)
+                funciones_editar_csv.añadir_pais(paises)
 
             case 6: #_________________ Op0. Editar pais ___________________________
                 print("=" *50)
                 print(f" 6. EDITAR PAÍS")
                 print("=" *50)
-                funciones_editar_csv.editar(paises)
+                funciones_editar_csv.editar_pais(paises)
             case 0: #_________________ Op0. Salir _______________________________
                 print("=" *50)
                 print(f" 0. SALIR")
@@ -74,7 +74,8 @@ def main():
                 print(" ¡Gracias por usar el sistema! Hasta luego.")
                 break
 
-            # case _ : Ya esta validado en las validaciones de la opcion 
+            case _: 
+                print("Ocurrio algo inesperado")
 
 # ============================================
 # PUNTO DE ENTRADA

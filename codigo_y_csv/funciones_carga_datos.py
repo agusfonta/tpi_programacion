@@ -12,17 +12,20 @@ RUTA_ARCHIVO = "paises.csv"
 # ============================================
 
 def normalizar_texto(texto):
-    """Elimina las tildes de un texto"""
+    """
+    Recibe un texto y devuelve un texto con las tildes eliminadas
+    Ej - Oceanía => Oceania 
+    """
     return unicodedata.normalize('NFD', texto).encode('ascii', 'ignore').decode('utf-8')
 
 def crear_lista_paises(RUTA):
     """
+    Recibe la ruta del archivo csv
     Lee el archivo CSV y crea una lista de diccionarios con los países.
     Valida cada registro y reporta errores encontrados.
     
     Retorna:
         list: Lista de diccionarios con datos de países válidos
-        
     """
 
     paises = [] # Países válidos que se cargarán

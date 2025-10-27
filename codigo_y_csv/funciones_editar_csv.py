@@ -4,7 +4,6 @@
 # ============================================
 import csv
 import funciones_validacion
-import funciones_carga_datos
 
 RUTA_ARCHIVO = "paises.csv"
 
@@ -13,26 +12,31 @@ RUTA_ARCHIVO = "paises.csv"
 # ============================================
 
 # ------- DE AGREGAR--------
-def añadir(paises):
+def añadir_pais(paises):
     dic_agregar = {} 
 
-    """Pide nombre del pais. Si el nombre del pais ya esta en el csv muesta mensaje de que ya ha sido agregado y corta la ejecucion. 
-    S el nombre NO esta, pide los otros datos y agrega el diccionario completo al csv"""
+    """
+    Recibe la lista de los diccionarios de los paises.
+
+    La funcion añade un pais nuevo con todos los datos completos al CSV. 
+
+    Pide nombre del pais. Si el nombre del pais ya esta en el csv muesta mensaje de que ya ha sido agregado y corta la ejecucion. 
+    Si el nombre NO esta, pide los otros datos y agrega el diccionario completo del pais nuevo al csv.
+
+    """
 
     if not pedir_datos_nuevo_pais("nombre",paises, "agregar", dic_agregar): 
-        # Si al pedir el nombre, este se encuentra en el csv no se ejecuta el if. 
-        # Si el nombre no existe en el csv, se ejecuta el if y comienza a pedir los otros datos del pais. 
         pedir_datos_nuevo_pais("poblacion",paises, "agregar", dic_agregar)
         pedir_datos_nuevo_pais("superficie",paises, "agregar",  dic_agregar)
         pedir_datos_nuevo_pais("continente",paises, "agregar", dic_agregar)
         
-        try: #Se abre el archivo para agregar -> "a"
+        try: 
             with open(RUTA_ARCHIVO, "a", newline="", encoding="utf-8") as archivo:
                 campos = ["nombre", "poblacion", "superficie", "continente"]
                 escritor = csv.DictWriter(archivo, fieldnames=campos, delimiter=";")
                 escritor.writerow(dic_agregar)
             
-            paises.append(dic_agregar) #Agregamos el diccionario del nuevo pais al csv
+            paises.append(dic_agregar)
             print(" - País agregado exitosamente")
             return True
                 
@@ -43,10 +47,18 @@ def añadir(paises):
             return False
 
 def pedir_datos_nuevo_pais(key, paises, metodo, dic=None):
-    # --- Parametros ---
-    # key => puede recibir nombre, poblacion, superficie o continente. Maneja con que tipo de dato estaremos trabajando
-    # metodo => recibe o agregar o editar. Es depende la funcion para lo que lo necesites. 
-    # dic => Recibe el diccionario del paisa editar. Por defecto es None ya que en el caso de agregar no lo necesitariamos. 
+    """ 
+    Pide los datos del pais nuevo al usuario. Si lo usamos para agregar, crea el diccionario y si es para editar, edita el pais elegido. 
+
+    key => puede recibir nombre, poblacion, superficie o continente. Maneja con que tipo de dato estaremos trabajando
+    metodo => recibe o agregar o editar. Es depende la funcion para lo que lo necesites. 
+    dic => Recibe el diccionario del pais en caso de querer editar. Por defecto es None ya que en el caso de agregar no lo necesitariamos.
+    paises => lista de diccionario de paises  
+
+    Si el metodo ingresado es agregar - suma un diccionario a la lista original y se actualiza el csv
+    Si el metodo ingresado es editar - retorna el diccionario del pais con los datos editados
+
+    """
 
     while True:
         dato = input(f"· Ingresa {key} del pais: ").strip()
@@ -75,7 +87,12 @@ def pedir_datos_nuevo_pais(key, paises, metodo, dic=None):
                 
     dic[key] = dato
 
-def validar_pais_existe(nombre, paises): #Recorre la lista de paises y valida. Si ya esta dentro de ella devuelve True
+def validar_pais_existe(nombre, paises): 
+    """
+    Recibe el nombre del pais y la lista de diccionarios de paises
+    Recorre la lista de paises y valida. Si ya esta dentro de ella devuelve True
+
+    """
     for pais in paises:
         if nombre.lower() == pais["nombre"].lower():
             return True
@@ -83,8 +100,15 @@ def validar_pais_existe(nombre, paises): #Recorre la lista de paises y valida. S
 # -------  DE EDITAR ----------
 
 def ingresar_nuevos_valores(key, pais):
-    """ Modifica el valor de la key ingresada del pais ingresado. 
-    Si la key es poblacion o superficie valida numero y si es nombre o continente valida texto"""
+    """ 
+    Recibe:
+    - key -> puede ser poblacion, superficie nombre o continente
+    - pais -> nombre del pais a editar
+
+    Modifica el valor de la key ingresada del pais ingresado. 
+    Si la key es poblacion o superficie valida numero y si es nombre o continente valida texto
+    
+    """
     
     while True:
         dato = input(f"· [Dato anterior: {pais[key]}] Valor actualizado de {key.capitalize()}: ").strip()
@@ -103,7 +127,13 @@ def ingresar_nuevos_valores(key, pais):
             break
 
 
-def editar(paises):
+def editar_pais(paises):
+    """
+    Funcion principal para editar pais. Muestra datos viejos y actualizados del pais. 
+    Sobre escribe el diccionario del pais con los datos nuevos en el csv 
+    
+    """
+
     booleano, dic_pais = pedir_datos_nuevo_pais("nombre", paises, "editar")
 
     print("-"*50)

@@ -8,12 +8,17 @@ import funciones_visualizacion
 # ============================================
 
 def mostrar_lista_al_usuario(lista_paises):
-        for pais in lista_paises:
-            for key, value in pais.items():
-                print(f" {key.capitalize()} : {value}")
-            print("-"*25)
+    """ Muestra la lista completa de paises al usuario"""
+    for pais in lista_paises:
+        for key, value in pais.items():
+            print(f" {key.capitalize()} : {value}")
+        print("-"*25)
 
 def mostrar_ordenados(lista_ordenados, key):
+    """
+    Recibe una lista ordenada y la muestra segun la key 
+    
+    """
     if key in ["nombre", "continente"]:
         for p in lista_ordenados:
             print(f"· {p[key]}")
@@ -23,6 +28,11 @@ def mostrar_ordenados(lista_ordenados, key):
             print(f"· {p["nombre"]}: {p[key]}")
 
 def mostrar_continentes(lista):
+    """
+    Recibe una lista de cantidad de paises por continentes y la muestra
+    
+    """
+
     continentes = ["Asia", "Europa", "Oceania", "Africa", "America"]
     
     for i in range(len(lista)):
@@ -31,6 +41,10 @@ def mostrar_continentes(lista):
 
 
 def mostrar_estadisticas(paises):
+    """
+    Muestra las estadisticas de los paises recibidos 
+    
+    """
     print(f" 1. Pais con mayor poblacion ")
     print("-"*50)
     pais_mayor = funciones_estadisticas.obtener_pais_mayor_poblacion(paises)

@@ -1,17 +1,19 @@
 # ============================================
 # IMPORTACIONES
 # ============================================
-import funciones_busqueda 
+import funciones_pide_datos
 import funciones_ordenamiento
 import funciones_validacion
 import funciones_visualizacion
-import funciones_estadisticas
+
 
 # ============================================
 # FUNCIONES DE MENÚS
 # ============================================
 
-def menu_principal(): #MENU PRINCIPAL
+def menu_principal():
+
+    """Muestra el menu principal"""
 
     print("\n" + "="*50)
     print("    SISTEMA DE GESTIÓN DE PAÍSES")
@@ -26,7 +28,9 @@ def menu_principal(): #MENU PRINCIPAL
     print("-"*50)
 
 
-def menu_filtros(paises): #MENU PRINCIPAL OP 2
+def menu_filtros(paises): 
+    
+    """Recibe la lista de paises y muestra el menu de la opcion 2 (filtros) del menu principal"""
     while True:
         print(" ")
         print("="*50)
@@ -42,19 +46,24 @@ def menu_filtros(paises): #MENU PRINCIPAL OP 2
 
         match opcion: 
             case 1:
-                ingresar_texto(paises,"continente")
+                funciones_pide_datos.ingresar_texto(paises,"continente")
     
             case 2:
-                ingresar_rango(paises, "poblacion")
+                funciones_pide_datos.ingresar_rango(paises, "poblacion")
 
             case 3:
-                ingresar_rango(paises, "superficie")
+                funciones_pide_datos.ingresar_rango(paises, "superficie")
         
             case 0:
                 break
 
+            case _: 
+                print("Ocurrio algo inesperado")
 
-def menu_ordenamiento(paises): # Menu >PRINCIPAL OP 3
+
+def menu_ordenamiento(paises): # MENU Opcion 3
+
+    """Recibe la lista de paises y muestra el menu de la opcion 3 (ordenamiento) del menu principal"""
     while True:
         print(" ")
         print("="*50)
@@ -117,53 +126,9 @@ def menu_ordenamiento(paises): # Menu >PRINCIPAL OP 3
             case 0:
                 break
 
-            # case _: Validacion hecha antes en la variable opcion
+            case _: 
+                print("Ocurrio algo inesperado")
 
-def ingresar_rango(paises, key):
-    while True:
-        rango_min = input("· Ingrese el valor minimo del rango: ")
-        if not funciones_validacion.validar_numero_entero(rango_min):
-            continue
-        rango_min=int(rango_min)
 
-        while True:
-            rango_max = input("· Ingrese el valor maximo del rango: ")
-            if not funciones_validacion.validar_numero_entero(rango_max):
-                continue
-            rango_max  = int(rango_max)
-            if not funciones_validacion.validar_rango(rango_min, rango_max):
-                continue
-            break
-        
-        print(" ")
-        print(f"· Paises con '{key}' entre '{rango_min}' y '{rango_max}' ")
-        print("-"*50)
-
-        paises_encontrados = funciones_busqueda.buscar_por_rango(rango_min, rango_max, paises, key)
-
-        if type(paises_encontrados) == list:
-            funciones_visualizacion.mostrar_lista_al_usuario(paises_encontrados)
-        else:
-            print(paises_encontrados)
-
-        break 
-
-def ingresar_texto(paises, key):
-    while True:
-        dato_ingresado= input(f"· Ingrese el {key}: ").strip()
-        if not funciones_validacion.validar_texto(dato_ingresado):
-            continue
-        dato_ingresado = dato_ingresado.capitalize()
-
-        print(" ")
-        print(f"· Paises que coinciden con '{dato_ingresado}' ")
-        print("-"*50)
-
-        paises_encontrados = funciones_busqueda.buscar_por_nombre(paises, dato_ingresado, key)
-
-        if type(paises_encontrados) == list:
-            funciones_visualizacion.mostrar_lista_al_usuario(paises_encontrados)
-        else:
-            print(paises_encontrados)
 
 

@@ -3,6 +3,10 @@
 # ============================================
 
 def validar_numero_entero(numero):
+    """
+    Recibe un numero y valida que sea correcto. Retorna True o False
+    
+    """
     try:
         if len(numero) == 0:
             raise ValueError("Campo vacío. Debe ingresar un número.")
@@ -25,6 +29,11 @@ def validar_numero_entero(numero):
 
 
 def validar_opcion_menu(min_opcion, max_opcion):
+
+    """
+    Recibe un numero y valida que sea entre las opciones del menu. Retorna la opcion
+    
+    """
     while True:
         try:
             opcion = int(input("· Seleccione una opción: "))
@@ -41,6 +50,10 @@ def validar_opcion_menu(min_opcion, max_opcion):
             print("~"*50)
 
 def validar_texto(texto):
+    """
+    Recibe un texto y valida que sea correcto. Retorna True o False
+    
+    """
     try:
         if len(texto) == 0:
             raise ValueError(" x Campo vacío. Debe ingresar un texto.")
@@ -55,6 +68,10 @@ def validar_texto(texto):
 
 
 def validar_rango(min, max):
+    """
+    Recibe dos numeros. Valida que ambos sean numeros y que el minimo sea mas chico que el maximo
+    
+    """
     if not max > min:
         print("~"*50)
         print(f"  x El numero ingresado debe ser mayor al minimo ingresado -> {min}")
