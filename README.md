@@ -235,9 +235,10 @@ El proyecto está diseñado siguiendo el principio de responsabilidad única, do
 
 ---
 
-## 📚 Informe y Conceptos Aplicados
+## 📚 Informe, Video y Conceptos Aplicados
 
 - **Link del informe**: https://colab.research.google.com/drive/16Ni9GnjZ9NN9UTEzmSm1cIw0udc5Ss8K
+- **Link del video**: https://drive.google.com/drive/folders/1NOrZL0LWhjJX_-OYsqQXJ4U-3RPmzR1Z?usp=sharing
 - **Listas y Diccionarios**: Almacenamiento y manipulación de datos estructurados
 - **Funciones**: Modularización y reutilización de código
 - **Condicionales**: Lógica de filtrado y validación
