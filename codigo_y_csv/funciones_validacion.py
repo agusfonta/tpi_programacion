@@ -23,7 +23,7 @@ def validar_numero_entero(numero):
     except ValueError as e:
         print("~"*70)
         print(f"  x Error: {e}")
-        print("  - Escritura permitida -> 20000")
+        print("  - Escritura permitida -> 2000")
         print("~"*70)
         return False
 
@@ -42,7 +42,7 @@ def validar_opcion_menu(min_opcion, max_opcion):
                 return opcion
             else:
                 print("~"*50)
-                print(f"  x Error: Ingrese un número entre {min_opcion} y {max_opcion}")
+                print(f"  x Error: Ingrese un número \n entre {min_opcion} y {max_opcion}")
                 print("~"*50)
         except ValueError:
             print("~"*50)
@@ -74,7 +74,8 @@ def validar_rango(min, max):
     """
     if not max > min:
         print("~"*50)
-        print(f"  x El numero ingresado debe ser mayor al minimo ingresado -> {min}")
+        print(f"  x El numero ingresado debe ser mayor al \n minimo ingresado -> {min}")
         print("~"*50)
+        return False
 
     return True

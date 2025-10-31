@@ -51,7 +51,7 @@ def main():
                 print(f" 4. MOSTRAR ESTADISTICAS")
                 print("=" *50)
 
-                funciones_visualizacion.mostrar_estadisticas()
+                funciones_visualizacion.mostrar_estadisticas(paises)
 
                 if not paises:
                     print("- No hay datos para mostrar estadísticas.")

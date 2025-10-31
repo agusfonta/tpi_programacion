@@ -27,16 +27,14 @@ def mostrar_ordenados(lista_ordenados, key):
         for p in lista_ordenados:
             print(f"· {p["nombre"]}: {p[key]}")
 
-def mostrar_continentes(lista):
+def mostrar_continentes(dic):
     """
-    Recibe una lista de cantidad de paises por continentes y la muestra
+    Recibe un diccionario con la cantidad de paises por continente y lo muestra
     
     """
-
-    continentes = ["Asia", "Europa", "Oceania", "Africa", "America"]
     
-    for i in range(len(lista)):
-        print(f"- Cantidad de paises de {continentes[i].upper}: {lista[i]}")
+    for key, value in dic.items():
+        print(f"- Cantidad de paises de {key}: {value}")
         print("-"*50)
 
 
@@ -62,13 +60,13 @@ def mostrar_estadisticas(paises):
     print(f" 3. Promedio de poblacion ")
     print("-"*50)
     promedio_poblacion = funciones_estadisticas.calcular_promedio_poblacion(paises)
-    print(f"=> {promedio_poblacion}")
+    print(f"=> {promedio_poblacion:.2f}\n")
 
     print("-"*50)
     print(f" 4. Promedio de superficie ")
     print("-"*50)
     promedio_superficie = funciones_estadisticas.calcular_promedio_superficie(paises)
-    print(f"=> {promedio_superficie}")
+    print(f"=> {promedio_superficie:.2f}\n")
 
     print("-"*50)
     print(f" 5. Paises por continente ")

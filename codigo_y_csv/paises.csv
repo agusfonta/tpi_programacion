@@ -1,7 +1,8 @@
 nombre;poblacion;superficie;continente
+Argentinaactualizada;382832823;5;Europa
 Brasil;215000000;8515767;America
 Alemania;83240000;357386;Europa
-España;47450795;505990;Europa
+Espana;47450795;505990;Europa
 Sudafrica;60042000;1221037;Africa
 Japon;125700000;377975;Asia
 Canada;38910000;9984670;America
@@ -12,7 +13,7 @@ Noruega;5425270;385207;Europa
 Egipto;104258000;1002450;Africa
 Colombia;51520000;1141748;America
 Nigeria;216746000;923768;Africa
-China;1412000000;9596961;Asia
+Polonia;923849;23747239;Asia
 Francia;67390000;643801;Europa
 Suecia;10550000;450295;Europa
 Dinamarca;5831000;43094;Europa
@@ -32,5 +33,3 @@ Tailandia;70078203;513120;Asia
 Vietnam;98168829;331212;Asia
 Filipinas;113880328;300000;Asia
 Arabia Saudita;35800000;2149690;Asia
-Iran;87700000;1648195;Asia
-

@@ -1,4 +1,3 @@
-
 # ============================================
 # IMPORTACIONES
 # ============================================
@@ -13,8 +12,6 @@ RUTA_ARCHIVO = "paises.csv"
 
 # ------- DE AGREGAR--------
 def añadir_pais(paises):
-    dic_agregar = {} 
-
     """
     Recibe la lista de los diccionarios de los paises.
 
@@ -24,11 +21,18 @@ def añadir_pais(paises):
     Si el nombre NO esta, pide los otros datos y agrega el diccionario completo del pais nuevo al csv.
 
     """
+    dic_agregar = {} 
 
-    if not pedir_datos_nuevo_pais("nombre",paises, "agregar", dic_agregar): 
-        pedir_datos_nuevo_pais("poblacion",paises, "agregar", dic_agregar)
-        pedir_datos_nuevo_pais("superficie",paises, "agregar",  dic_agregar)
-        pedir_datos_nuevo_pais("continente",paises, "agregar", dic_agregar)
+    booleano, nombre = pedir_datos_nuevo_pais("nombre", paises, "agregar")
+
+    if booleano: 
+        dic_agregar["nombre"] = nombre
+        poblacion = pedir_datos_nuevo_pais("poblacion",paises, "agregar")
+        dic_agregar["poblacion"] = poblacion 
+        superficie = pedir_datos_nuevo_pais("superficie",paises, "agregar")
+        dic_agregar["superficie"] = superficie
+        continente = pedir_datos_nuevo_pais("continente",paises, "agregar")
+        dic_agregar["continente"] = continente 
         
         try: 
             with open(RUTA_ARCHIVO, "a", newline="", encoding="utf-8") as archivo:
@@ -45,8 +49,11 @@ def añadir_pais(paises):
             print("  x Error: Archivo no encontrado.")
             print("~"*50)
             return False
+    # CAMBIO 1: Agregado return False cuando el país ya existe
+    else:
+        return False
 
-def pedir_datos_nuevo_pais(key, paises, metodo, dic=None):
+def pedir_datos_nuevo_pais(key, paises, metodo):
     """ 
     Pide los datos del pais nuevo al usuario. Si lo usamos para agregar, crea el diccionario y si es para editar, edita el pais elegido. 
 
@@ -79,13 +86,19 @@ def pedir_datos_nuevo_pais(key, paises, metodo, dic=None):
         if validar_pais_existe(dato, paises):
             if metodo == "agregar":
                 print("- Pais existente")
-                return False
-            if metodo == "editar":
+                return False, dato
+            elif metodo == "editar":
                 for pais in paises:
                     if pais[key] == dato:
                         return True, pais
-                
-    dic[key] = dato
+        else:
+            if metodo == "agregar":
+                return True, dato
+            # CAMBIO: Agregado manejo cuando el país NO existe en modo editar
+            elif metodo == "editar":
+                return False, None  # Retorna False y None para indicar que no existe
+    
+    return dato
 
 def validar_pais_existe(nombre, paises): 
     """
@@ -96,6 +109,9 @@ def validar_pais_existe(nombre, paises):
     for pais in paises:
         if nombre.lower() == pais["nombre"].lower():
             return True
+        # CAMBIO 5: ELIMINADO else: return False
+    # CAMBIO 6: Agregado return False FUERA del bucle
+    return False
 
 # -------  DE EDITAR ----------
 
@@ -116,7 +132,9 @@ def ingresar_nuevos_valores(key, pais):
         if key in ["poblacion", "superficie"]:
             if not funciones_validacion.validar_numero_entero(dato):
                 continue  
-            dato = int(dato) 
+            dato = int(dato)
+            # CAMBIO 7: Agregada asignación del dato al diccionario
+            pais[key] = dato
             break  
 
         if key in ["nombre","continente"]:
@@ -134,10 +152,20 @@ def editar_pais(paises):
     
     """
 
-    booleano, dic_pais = pedir_datos_nuevo_pais("nombre", paises, "editar")
+    # CAMBIO: Capturar el resultado de pedir_datos_nuevo_pais
+    resultado = pedir_datos_nuevo_pais("nombre", paises, "editar")
+    
+    # CAMBIO: Verificar si resultado es una tupla válida
+    if resultado is None or (isinstance(resultado, tuple) and not resultado[0]):
+        print("~"*50)
+        print("  x Error: País no existente")
+        print("~"*50)
+        return False
+    
+    booleano, dic_pais = resultado
 
     print("-"*50)
-    print(f"· Datos actuales de {dic_pais["nombre"].capitalize()}")
+    print(f"· Datos actuales de {dic_pais['nombre'].capitalize()}")
     for key, value in dic_pais.items():
         print(f"  {key.capitalize()}: {value}")
     print("-"*50)
@@ -150,7 +178,7 @@ def editar_pais(paises):
         ingresar_nuevos_valores("continente", dic_pais)
 
         print("-"*50)
-        print(f"· Datos ACTUALIZADOS de {dic_pais["nombre"].capitalize()}")
+        print(f"· Datos ACTUALIZADOS")
         for key, value in dic_pais.items():
             print(f"  {key.capitalize()}: {value}")
         print("-"*50)

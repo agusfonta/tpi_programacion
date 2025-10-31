@@ -46,6 +46,7 @@ def ingresar_rango(paises, key):
 
         break 
 
+
 def ingresar_texto(paises, key):
 
     """
@@ -71,3 +72,4 @@ def ingresar_texto(paises, key):
             funciones_visualizacion.mostrar_lista_al_usuario(paises_encontrados)
         else:
             print(paises_encontrados)
+        break

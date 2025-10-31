@@ -44,27 +44,26 @@ def calcular_promedio_superficie(paises):
 def contar_paises_por_continente(paises):
     """
     Recibe la lista de paises y cuenta la cantidad de paises por continente
-    Retorna una lista ordenada (asia, europa, oceania, africa, america) con las cantidades de paises de cada continente
+    Retorna un diccionario con las cantidades de paises de cada continente
     
     """
-    asia = 0
-    europa= 0
-    oceania = 0
-    africa = 0
-    america = 0
+    continentes = {"Asia": 0,"Europa": 0,"Oceania" : 0,"Africa" : 0,"America": 0,}
 
     for p in paises:
         if p["continente"] == "Asia":
-            asia += 1
+            continentes["Asia"] += 1
+            continue
         elif p["continente"] == "Europa":
-            europa += 1
-        elif p["continente"] == "Oceanía":
-            oceania += 1
-        elif p["continente"] == "África":
-            africa += 1
-        elif p["continente"] == "América":
-            america += 1
+            continentes["Europa"] += 1
+            continue
+        elif p["continente"] == "Oceania":
+            continentes["Oceania"] += 1
+            continue
+        elif p["continente"] == "Africa":
+            continentes["Africa"] += 1
+            continue
+        elif p["continente"] == "America":
+            continentes["America"] += 1
+            continue
 
-        lista = [asia, europa, oceania, africa, america]
-    
-    return lista
+    return continentes
